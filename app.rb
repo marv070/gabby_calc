@@ -1,20 +1,22 @@
 require "sinatra"
+#first use 'require_relative' for the files needed to use the math methods(need to be in same folder as app.rb)
 require_relative "Subtraction.rb"
 require_relative "Multiplication.rb"
 require_relative "Addition.rb"
 require_relative "Division.rb"
+#enable sessions since they are disabled by default
 enable :sessions
 
-get "/" do 
+get "/" do # directs to the home page (root directory). 'get' goes to a page
 	session[:msg] = ""
-	erb :loginpage, locals: {msg: session[:msg]}
+	erb :loginpage, locals: {msg: session[:msg]}  # directs from 'loginpage' erb(embedded ruby) file. (Shows something). SESSIONS ARE USED TO KEEP STATE.
 end
 post "/user_pass" do
-	username = params[:username] 
+	username = params[:username] # brings parameters from input forms, from the erb
 	password = params[:password]
-	if username == "Open" && password == "Saysme"
-		session[:msg] = "Successful Login"
-		redirect "/name?username=" + username + "&password=" + password
+	if username == "Open" && password == "Saysme" #if the username entered is 'Open' AND the password is 'Saysme' it'll pass to 'Successful Login'
+		session[:msg] = "Successful Login" #the session here keeps 'Successful Login' if every username and password passes
+		redirect "/name?username=" + username + "&password=" + password #redirects to name(next one) and continues by adding on the username and password
 	elsif username == "Mined" && password == "Minds"
 		session[:msg] = "Successful Login"
 		redirect "/name?username=" + username + "&password=" + password
@@ -25,8 +27,8 @@ post "/user_pass" do
 		session[:msg] = "Successful Login"
 		redirect "/name?username=" + username + "&password=" + password
 	else
-		session[:msg] = "Error. The username or password that was entered is incorrect"
-		erb :loginpage, locals: {msg: session[:msg]}
+		session[:msg] = "Error. The username or password that was entered is incorrect" #session message if usernames/passwords are incorrect(this again, keeps the state of the message & repeats the SAME message if given any incorrect words)
+		erb :loginpage, locals: {msg: session[:msg]} #directs from  loginpage, locals:
 	end
 end
 
