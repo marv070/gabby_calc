@@ -1,9 +1,9 @@
 require "sinatra"
 #first use 'require_relative' for the files needed to use the math methods(need to be in same folder as app.rb)
-require_relative "Subtraction.rb"
-require_relative "Multiplication.rb"
-require_relative "Addition.rb"
-require_relative "Division.rb"
+require_relative "sub.rb"
+require_relative "mult.rb"
+require_relative "add.rb"
+require_relative "div.rb"
 #enable sessions since they are disabled by default
 enable :sessions
 
